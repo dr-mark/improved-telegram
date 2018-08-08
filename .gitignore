@@ -23,6 +23,9 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# PyCharm
+.idea
+
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
