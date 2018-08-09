@@ -3,10 +3,25 @@
 
 {% block body %}
 <h2>{% trans 'Files' %}</h2>
-<ul>
+<table>
+    <tr>
+        <th>{% trans 'File description' %}</th>
+        <th>{% trans 'Public' %}</th>
+        <th>{% trans 'Upload by' %}</th>
+        <th>{% trans 'Upload time/date' %}</th>
+        <th>{% trans 'Link to original file' %}</th>
+    </tr>
 {% for file_upload in file_upload_list %}
-    <li><a href="{{ file_upload.get_absolute_url }}">{{ file_upload.description }}</a></li>
+    <tr>
+        <td>
+            <a href="{{ file_upload.get_absolute_url }}">{{ file_upload.description }}</a>
+        </td>
+        <td>{{ file_upload.public }}</td>
+        <td>{{ file_upload.created_by }}</td>
+        <td>{{ file_upload.created_at }}</td>
+        <td><a href="{{ file_upload.file.url }}">{{ file_upload.file }}</a></td>
+    </tr>
 {% endfor %}
-</ul>
+</table>
 <p><a href="{% url 'filemanager:create' %}">{% trans 'Upload a new file' %}</a></p>
 {% endblock %}
