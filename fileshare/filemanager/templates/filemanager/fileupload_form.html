@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h2>{% trans 'Upload new File' %}</h2>
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <input type="submit" value="{% trans 'Submit' %}" />
+</form>
+<p><a href="{% url 'filemanager:list' %}">{% trans 'Back to file list' %}</a></p>
+{% endblock %}
