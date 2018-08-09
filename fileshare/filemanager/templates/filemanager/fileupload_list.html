@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h2>{% trans 'Files' %}</h2>
+<ul>
+{% for file_upload in file_upload_list %}
+    <li><a href="{{ file_upload.get_absolute_url }}">{{ file_upload.description }}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

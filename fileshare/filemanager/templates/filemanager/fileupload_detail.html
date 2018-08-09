@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block body %}
+<h2>{% trans 'File Detail' %}</h2>
+<dl>
+    <dt>{% trans 'Description' %}</dt>
+    <dd>{{ object.description }}</dd>
+    <dt>{% trans 'Public' %}</dt>
+    <dd>{{ object.public }}</dd>
+    <dt>{% trans 'Uploaded by' %}</dt>
+    <dd>{{ object.created_by }}</dd>
+    <dt>{% trans 'Uploaded at' %}</dt>
+    <dd>{{ object.created_at }}</dd>
+    <dt>{% trans 'File' %}</dt>
+    <dd>{{ object.file }}</dd>
+</dl>
+<p><a href="{% url 'filemanager:list' %}">{% trans 'Back to file list' %}</a></p>
+{% endblock %}
