@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+<p><a href="{% url 'filemanager:list' %}">{% trans 'File list' %}</a></p>
+{% endblock %}
