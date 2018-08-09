@@ -29,8 +29,15 @@ class FileUploadDetail(LoginRequiredMixin, ViewPermissionsMixin, DetailView):
 
 
 class FileUploadList(LoginRequiredMixin, ListView):
-    model = FileUpload
     context_object_name = 'file_upload_list'
+
+    def get_queryset(self):
+        """
+        Limit the FileUpload objects listed to those that the
+        current user has permission to view.
+        :return: queryset
+        """
+        return FileUpload.objects.for_user(self.request.user)
 
 
 class FileUploadCreate(LoginRequiredMixin, CreateView):
