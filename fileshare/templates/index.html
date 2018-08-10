@@ -2,5 +2,11 @@
 {% load i18n %}
 
 {% block content %}
+<p>
+    This is a Django application intended to allow users to upload
+    files, which can subsequently be downloaded by the uploading
+    user, and other users if marked as public.
+</p>
 <p><a href="{% url 'filemanager:list' %}">{% trans 'File list' %}</a></p>
+<p><a href="api/">{% trans 'Browse the API' %}</a></p>
 {% endblock %}
