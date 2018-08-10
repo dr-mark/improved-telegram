@@ -3,6 +3,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.edit import CreateView
 from django.views.generic import ListView, DetailView
 
+from rest_framework import viewsets
+from rest_framework.filters import SearchFilter
+
+from .serializers import FileUploadSerializer
+
 from .models import FileUpload
 
 
@@ -47,3 +52,21 @@ class FileUploadCreate(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.created_by = self.request.user
         return super(FileUploadCreate, self).form_valid(form)
+
+
+class FileUploadViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    API endpoint that allows file uploads to be viewed
+    """
+    queryset = FileUpload.objects.all().order_by('-created_at')
+    serializer_class = FileUploadSerializer
+    filter_backends = (SearchFilter,)
+    search_fields = ('file',)
+
+    def get_queryset(self):
+        """
+        Limit the FileUpload objects listed to those that the
+        current user has permission to view.
+        :return: queryset
+        """
+        return FileUpload.objects.for_user(self.request.user).order_by('-created_at')

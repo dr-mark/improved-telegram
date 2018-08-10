@@ -1,7 +1,11 @@
 from django.conf.urls import include, url
 
-from .views import FileUploadDetail, FileUploadList, FileUploadCreate
+from rest_framework import routers
 
+from .views import FileUploadDetail, FileUploadList, FileUploadCreate, FileUploadViewSet
+
+router = routers.DefaultRouter()
+router.register(r'fileuploads', FileUploadViewSet)
 
 app_name = 'filemanager'
 urlpatterns = [

@@ -19,8 +19,17 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.views.generic import TemplateView
 
+from rest_framework import routers
+
+from filemanager.urls import router as filemanager_router
+
+router = routers.DefaultRouter()
+router.registry.extend(filemanager_router.registry)
+
 urlpatterns = [
     url(r'^$', TemplateView.as_view(template_name='index.html'), name="index"),
+    url(r'^api/', include(router.urls)),
+    url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     url(r'^files/', include('filemanager.urls')),
